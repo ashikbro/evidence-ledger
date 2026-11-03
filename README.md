@@ -66,3 +66,16 @@ print(ledger.export_json())
 The export format is versioned as `evidence-ledger/v1`. Content is never
 silently replaced: claim reviews, source additions, and links are recorded in
 the append-only event history.
+
+## Browser showcase
+
+The `web/` directory provides a dependency-free interactive demo with sample
+claims, source excerpts, review states, search, local persistence, and JSON
+bundle export:
+
+```sh
+python -m http.server 8000 --directory web
+```
+
+Open <http://localhost:8000>. It demonstrates the review experience while the
+Python ledger remains the source-of-truth implementation.

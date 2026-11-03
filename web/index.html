@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Evidence Ledger: make research and AI-assisted decisions traceable.">
+    <title>Evidence Ledger</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="#"><span class="mark">✦</span><span>Evidence <b>Ledger</b></span></a><span class="local"><i></i> Local demo · no data leaves your browser</span></header>
+    <main>
+      <section class="hero"><div><p class="eyebrow">Traceable by design</p><h1>Make every claim<br><em>answerable to evidence.</em></h1><p class="lede">A lightweight workspace for research and AI-assisted decisions. Capture the claim, preserve the source, and keep uncertainty visible.</p><div class="actions"><a class="button primary" href="#workspace">Open the ledger ↓</a><a class="button ghost" href="https://github.com/ashikbro/evidence-ledger">View source ↗</a></div></div><div class="hero-note"><span class="quote">“</span><p>Persuasive is not the same as proven.</p><small>Evidence Ledger principle 01</small></div></section>
+      <section id="workspace" class="workspace"><aside class="sidebar"><p class="eyebrow">Workspace</p><button class="nav active" data-view="claims">◈ Claims <b id="claim-count">0</b></button><button class="nav" data-view="review">⌁ Review queue <b id="review-count">0</b></button><button class="nav" data-view="sources">▧ Sources <b id="source-count">0</b></button><div class="sidebar-bottom"><button class="button primary full" id="new-claim">＋ Add claim</button><button class="button export full" id="export">Export evidence bundle</button></div></aside>
+        <section class="ledger"><div class="ledger-head"><div><p class="eyebrow" id="view-label">Claim registry</p><h2 id="view-title">Your evidence graph</h2></div><input id="search" type="search" placeholder="Search claims..." aria-label="Search claims"></div><div id="view"></div></section>
+      </section>
+      <section class="principles"><div><p class="eyebrow">Why it matters</p><h2>Trust needs<br>a paper trail.</h2></div><div class="principle-grid"><article><b>01</b><h3>Preserve the excerpt</h3><p>Keep the exact passage and capture time alongside the source URL.</p></article><article><b>02</b><h3>Expose conflict</h3><p>Contradicting evidence should create a review task, not disappear.</p></article><article><b>03</b><h3>Export the chain</h3><p>Take a portable, machine-readable evidence bundle wherever it needs to go.</p></article></div></section>
+    </main>
+    <div class="modal hidden" id="modal"><form class="modal-card" id="claim-form"><button type="button" class="close" id="close">×</button><p class="eyebrow">New claim</p><h2>Capture a proposition</h2><label>Claim text<input id="claim-text" required placeholder="What are you asserting?"></label><label>Confidence <output id="confidence-value">0.70</output><input id="confidence" type="range" min="0" max="1" step=".05" value=".7"></label><label>Source title<input id="source-title" required placeholder="Report, paper, or dataset"></label><label>Source URL<input id="source-uri" type="url" required placeholder="https://..."></label><label>Evidence excerpt<textarea id="source-excerpt" required placeholder="Paste the relevant passage..."></textarea><label>Relationship<select id="relation"><option value="supports">Supports</option><option value="contradicts">Contradicts</option><option value="context">Context</option></select></label><button class="button primary full">Add to ledger</button></form></div>
+    <div class="toast" id="toast"></div><script src="app.js"></script>
+  </body>
+</html>
