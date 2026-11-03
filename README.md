@@ -40,5 +40,42 @@ history, and confidence level.
 
 ## Status
 
-Project initialized locally. The GitHub repository will be published once
-repository-creation permission is available for the authenticated account.
+**MVP core implemented.** The dependency-free `EvidenceLedger` class supports
+claims, sources, typed evidence links, review status, an append-only event
+history, a review queue for unsupported or conflicting claims, and portable
+JSON bundles.
+
+## Development
+
+```sh
+python -m venv .venv
+.venv/bin/pip install pytest
+PYTHONPATH=src .venv/bin/pytest
+```
+
+```python
+from evidence_ledger import EvidenceLedger
+
+ledger = EvidenceLedger("evidence.db")
+source = ledger.add_source("Research report", "https://example.test/report", "Relevant excerpt")
+claim = ledger.add_claim("A traceable claim", confidence=0.8)
+ledger.link(claim.id, source.id, "supports")
+print(ledger.export_json())
+```
+
+The export format is versioned as `evidence-ledger/v1`. Content is never
+silently replaced: claim reviews, source additions, and links are recorded in
+the append-only event history.
+
+## Browser showcase
+
+The `web/` directory provides a dependency-free interactive demo with sample
+claims, source excerpts, review states, search, local persistence, and JSON
+bundle export:
+
+```sh
+python -m http.server 8000 --directory web
+```
+
+Open <http://localhost:8000>. It demonstrates the review experience while the
+Python ledger remains the source-of-truth implementation.
