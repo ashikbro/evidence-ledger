@@ -32,3 +32,19 @@ def test_input_validation():
         ledger.add_claim("Claim", confidence=2)
     with pytest.raises(ValueError, match="required"):
         ledger.add_source("", "uri", "excerpt")
+
+
+def test_invalid_relation_rejected():
+    ledger = EvidenceLedger()
+    source = ledger.add_source("S", "https://x", "excerpt")
+    claim = ledger.add_claim("C")
+    with pytest.raises(ValueError, match="relation"):
+        ledger.link(claim.id, source.id, "invalid")
+
+
+def test_export_is_sorted_and_versioned():
+    ledger = EvidenceLedger()
+    ledger.add_claim("First")
+    data = json.loads(ledger.export_json())
+    assert data["format"] == "evidence-ledger/v1"
+    assert "events" in data
