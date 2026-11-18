@@ -1,51 +1,18 @@
 # Evidence Ledger
 
-An auditable evidence graph for research and AI-assisted decisions.
+**Auditable evidence graph** for research and AI-assisted decisions.
 
-## Why this project
+Make claims traceable: every claim connects to its source, extraction method, transformation history, and confidence level.
 
-AI systems can produce persuasive answers without preserving the chain of
-evidence behind them. Evidence Ledger is intended to make claims traceable:
-every claim should connect to its source, extraction method, transformation
-history, and confidence level.
+## What it does now
 
-## MVP
+- Claims and source references with stable identifiers
+- Typed evidence links
+- Review status and queue for unsupported or conflicting claims
+- Append-only event history
+- Portable JSON evidence bundles (`evidence-ledger/v1`)
 
-- Capture claims and source references with stable identifiers.
-- Preserve excerpts, timestamps, and source metadata.
-- Record how a claim was transformed or summarized.
-- Expose a review view showing unsupported or conflicting claims.
-- Export a portable, machine-readable evidence bundle.
-
-## Non-goals for the first release
-
-- Training or hosting a foundation model.
-- Replacing domain experts or formal peer review.
-- Building a general-purpose notes application.
-
-## Proposed stack
-
-- **API:** Python, FastAPI, and Pydantic
-- **Storage:** PostgreSQL with an append-only event history
-- **Search:** PostgreSQL full-text search first; pluggable semantic search later
-- **UI:** React and TypeScript
-- **Quality:** pytest, contract tests, and reproducible export fixtures
-
-## First milestone
-
-1. Define the claim, source, citation, and transformation model.
-2. Implement append-only persistence and evidence-bundle export.
-3. Add a minimal review interface for claim coverage and conflicts.
-4. Publish one end-to-end example using public research material.
-
-## Status
-
-**MVP core implemented.** The dependency-free `EvidenceLedger` class supports
-claims, sources, typed evidence links, review status, an append-only event
-history, a review queue for unsupported or conflicting claims, and portable
-JSON bundles.
-
-## Development
+## Quick start
 
 ```sh
 python -m venv .venv
@@ -63,19 +30,12 @@ ledger.link(claim.id, source.id, "supports")
 print(ledger.export_json())
 ```
 
-The export format is versioned as `evidence-ledger/v1`. Content is never
-silently replaced: claim reviews, source additions, and links are recorded in
-the append-only event history.
-
-## Browser showcase
-
-The `web/` directory provides a dependency-free interactive demo with sample
-claims, source excerpts, review states, search, local persistence, and JSON
-bundle export:
+## Browser demo
 
 ```sh
 python -m http.server 8000 --directory web
 ```
 
-Open <http://localhost:8000>. It demonstrates the review experience while the
-Python ledger remains the source-of-truth implementation.
+## Keywords
+
+knowledge graph · evidence · research · ai · audit · python · provenance
